@@ -3,8 +3,6 @@
  * that can be found in the license/LICENSE.txt file.
  */
 
-@file:kotlin.jvm.JvmMultifileClass
-@file:kotlin.jvm.JvmName("ComparisonsKt")
 
 package kotlin.comparisons
 

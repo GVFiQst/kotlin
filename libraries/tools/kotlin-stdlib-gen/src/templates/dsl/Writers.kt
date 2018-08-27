@@ -73,11 +73,16 @@ fun List<MemberBuilder>.writeTo(file: File, platformSource: PlatformSourceFile) 
     file.parentFile.mkdirs()
     FileWriter(file).use { writer ->
         writer.appendln(COPYRIGHT_NOTICE)
-        if (sourceFile.multifile) {
-            writer.appendln("@file:kotlin.jvm.JvmMultifileClass")
-        }
 
-        writer.appendln("@file:kotlin.jvm.JvmName(\"${sourceFile.jvmClassName}\")")
+        when (platform) {
+            Platform.Common, Platform.JVM -> {
+                if (sourceFile.multifile) {
+                    writer.appendln("@file:kotlin.jvm.JvmMultifileClass")
+                }
+
+                writer.appendln("@file:kotlin.jvm.JvmName(\"${sourceFile.jvmClassName}\")")
+            }
+        }
         writer.appendln()
 
         writer.append("package ${sourceFile.packageName ?: "kotlin"}\n\n")
