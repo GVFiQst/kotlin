@@ -154,7 +154,7 @@ class JvmOverloadsAnnotationLowering(val context: JvmBackendContext) : ClassLowe
         // Call the long version of `initialize()`, because otherwise default implementation inserts
         // an unwanted `dispatchReceiverParameter`.
         result.initialize(
-            extensionReceiverParameter,
+            extensionReceiverParameter?.copy(result),
             dispatchReceiverParameter,
             typeParameters,
             generateNewValueParameters(this, numDefaultParametersToExpect),
