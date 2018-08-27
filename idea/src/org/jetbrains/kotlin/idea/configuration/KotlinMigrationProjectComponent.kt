@@ -94,10 +94,12 @@ class KotlinMigrationProjectComponent(val project: Project) {
             if (migrationNotificationDialog.isOK) {
                 val action = ActionManager.getInstance().getAction(CodeMigrationAction.ACTION_ID)
 
-                val dataContext = DataManager.getInstance().dataContextFromFocus.result
-                val actionEvent = AnActionEvent.createFromAnAction(action, null, ActionPlaces.ACTION_SEARCH, dataContext)
+                val dataContext = dataContext
+                if (dataContext != null) {
+                    val actionEvent = AnActionEvent.createFromAnAction(action, null, ActionPlaces.ACTION_SEARCH, dataContext)
 
-                action.actionPerformed(actionEvent)
+                    action.actionPerformed(actionEvent)
+                }
             }
         }
     }
